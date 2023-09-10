@@ -1,8 +1,9 @@
 0.6: New note in Single page app diagram
 Create a diagram depicting the situation where the user creates a new note using the single-page version of the app.
 
-In this case, the head links to the main.css and spa.js files that are requested with a GET as in the original example. However, in the spa.js script
-there is a variable << notes >> that seems to contain all information from the data.json file. The spa.js script contains also a function that seems to, first update the web app and later, send a file called note (maybe note.json) to the server for its treatment. The difference then is that the script spa.js contains all the functions to make the app work while in the previous version we saw, there was two different scripts in javascript, one in the browser to render the page and send any new << note >> to the server and another in the server to manage the notes and render the page and resend it to the browser. In this version, the page is rendered by the browser with the new data and sent to the server to just keep the << notes >> updated.
+As we saw in the previous exercise, the GET request download the spa.html and due to its links, the main.css and spa.js. The javaScript file spa.js has functions to render the content of the data.json (the list of notes) so it prevents to get this done in the server (at least I believe so but I have not found a complete description of the process).
+
+The spa.js script contains a function that seems to, first update the web app and later send POST request with a file called note (maybe note.json) to the server for its treatment. The updated seems to use a variable called note to contain all notes and be able to render it on the browser. Therefore, I would say (but not totally sure) that the server needs only to update the data.json for the other users of the app without any other modification.
 
 In this diagram, I have included what I believe it happens when a new note is added. On one hand, the note file is updated in the browser computer, the file is updated in the browser, the browser renders the notes again (reDrawnotes function in the spa.js file) and make a POST request to the server.
 
@@ -20,12 +21,19 @@ S-->>B: spa.js
 B->>S: GET https://studies.cs.helsinki.fi/exampleapp/data.json
 S-->>B: data.json
 deactivate S
+
+
+Note right of B: User add text in the box and click on save
+
 activate B
-Note right of B : Update notes
 Note right of B: Rendering the updated notes
+Note right of B : Update notes file
+deactivate B
+
 activate S
+Note left of S : Send notes file to server
 B->>S: POST  https://studies.cs.helsinki.fi/exampleapp/new_note_spa
 B-->>S: note
-deactivate B
+
 deactivate S
 ```
