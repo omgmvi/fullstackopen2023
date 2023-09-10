@@ -10,8 +10,11 @@ sequenceDiagram
     activate server
     Note right of server: JavaScript code push text onto data.json
     server-->>browser: HTML document
-    server-->>browser: the css file
-    server-->>browser: the JavaScript file
-    server-->>browser: ./data.json
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    server-->>browser: main.css
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    server-->>browser: main.js
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    server-->>browser: data.json
     deactivate server
 ```
