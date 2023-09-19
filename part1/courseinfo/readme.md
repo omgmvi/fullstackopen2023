@@ -1,1 +1,0 @@
-This is the solution to the part 1 exercise named course info. It ask for refactoring a little single page application so that every html tag is a call to a subcomponent within App.jsx. This way, we practice how React evaluates the call to components and JavaScript code.
